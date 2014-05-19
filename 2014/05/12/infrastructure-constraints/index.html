@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Infrastructure constraints :: Field notes for a web app project</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="/build.css">
+  </head>
+  <body>
+    <header>
+    </header>
+
+    <section class="index">
+
+      <section class="intro">
+        <h2><a href="/">Home</a></h2>
+        <h2>The project</h2>
+        <ul>
+        
+          <li><a href="/summary">Summary</a></li>
+        
+          <li><a href="/initial-proposal">Initial Proposal</a></li>
+        
+        </ul>
+      </section>
+      
+      <section class="meta">
+        <h2>Meta</h2>
+        <ul>
+        
+          <li><a href="/meta/motivations">Motivations</a></li>
+        
+        </ul>
+      </section>
+
+      <section class="diary">
+        <h2>Diary</h2>
+        <ul>
+        
+          <li><h3>12 May 2014</h3>
+            <ul>
+            
+              <li><a href="/2014/05/12/current-questions-for-the-team">Current questions for the team</a></li>
+            
+              <li><a href="/2014/05/12/team">Team</a></li>
+            
+              <li><a href="/2014/05/12/infrastructure-constraints">Infrastructure constraints</a></li>
+            
+              <li><a href="/2014/05/12/user-interface-initial-thoughts">User interface, initial thoughts</a></li>
+            
+            </ul>
+          </li>
+        
+        </ul>
+      </section>
+
+    </section>
+
+    <section class="body">
+
+      <h1>Infrastructure constraints</h1>
+      <p>As mentioned, the company hosts user accounts through Google, replicating
+its ActiveDirectory store or however that works. In addition, IT has a
+strong bias towards using Google&#39;s application infrastructure (Google App &amp;
+Compute Engine for instance). Deploying applications elsewhere would be a
+bit of an uphill battle, and less straightforward to authenticate users. So
+we should basically assume, unless a compelling alternative presents itself,
+that the application should be deployed to Google App Engine.</p>
+<p>Several constraints follow on this, since GAE is a bit more of a controlled
+(and controlling!) environment than your typical cloud platform. In particular,
+the server language practically speaking has to be either Java or Python. (Go
+and PHP are possible too, but are much less production-ready). For me,
+Python is the more familiar choice.</p>
+<h3 id="events-and-event-recurrence">Events and event recurrence</h3>
+<p>The primary technical hurdle I see is <em>persistence of event recurrence</em>. I
+would greatly prefer not to implement this myself, but instead piggyback
+on an existing calendar system - Google calendar being the obvious choice
+given our infrastructure.</p>
+<p>Google has a <strong>CalDAV interface</strong>, which would make it easier to swap out
+backends, theoretically, -- however:</p>
+<ol>
+<li>Google has threatened once to drop support for CalDAV (June 2013) 2. It is
+not clear whether Google&#39;s CalDAV stores non-standard properties in event data.</li>
+<li>CalDAV is a bit more of a pain to use, because there is no CalDAV python
+client that deals with Google OAuth; you basically have to do the auth and
+the CalDAV requests using an httplib2 instance.</li>
+</ol>
+<p>For these reasons, the Google <strong>Calendar API</strong> client seems like a better
+choice, most likely wrapped in an application adapter layer since we don&#39;t
+need all the functionality of calendar events to model data-send tasks. (Also
+to protect against API flux; Google is already on v3 of this API!)</p>
+<p>Going down this route, essentially the application can be seen as a
+<em>domain-specific, alternative front-end to Google calendar</em>.  It will likely
+need as well some sort of data store for user authorization and preferences.</p>
+<p>Note that the Calendar API seems increasingly geared towards <em>sync</em>, including
+push-based sync: meaning the client application stores a copy of event data
+as well, and either syncs with the calendar periodically or receives updates
+via webhook push.  That adds quite a bit of complexity that I hope to avoid,
+although it may become practical since retrieving a lot of events for a lot
+of users could be slow and also end up hitting Google&#39;s rate-limit. This is
+one thing I would like to estimate before going too far.</p>
+<p>It does seem that Calendar API does allow flexibility in querying, similar
+to CalDAV&#39;s REPORT verb, with parameters for <code>timeMax</code> and <code>timeMin</code> as well
+as <code>sharedExtendedProperty name=value</code>. Although apparently <em>no</em> filter for
+attendees or creator/organizer.</p>
+<p>Given we are looking at basically 1 day / 1 week / 2 week / 1 month views
+of the data, at least for the primary UI, hopefully this will be sufficient
+without needing a local cache.</p>
+<p>I can see the PM director&#39;s &#39;monthly&#39; (or even longer) UI possibly syncing
+with the calendar given you may need up to a year&#39;s worth of data to crunch.</p>
+<p>Another consideration is <em>backup of calendar events</em>. Does Google provide
+some kind of automated calendar backup?</p>
+<h3 id="non-event-data">Non-event data</h3>
+<p>For the most part this can be straightforwardly modeled with
+<code>sharedExtendedProperties</code>, hopefully.</p>
+<p>Potentially the <code>attendees</code> could be used to model PM, DM, etc.; but there
+is no way to filter responses on attendees.</p>
+<p>For the task status, i.e. &quot;open&quot; or &quot;completed&quot;, it seems like there should
+be a built-in field we can piggyback on, but apparently not, so likewise it
+should be an extended property.</p>
+
+
+    </section>
+
+    <section class="footer">
+    </section>
+
+</div>

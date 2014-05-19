@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Summary :: Field notes for a web app project</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="/build.css">
+  </head>
+  <body>
+    <header>
+    </header>
+
+    <section class="index">
+
+      <section class="intro">
+        <h2><a href="/">Home</a></h2>
+        <h2>The project</h2>
+        <ul>
+        
+          <li><a href="/summary">Summary</a></li>
+        
+          <li><a href="/initial-proposal">Initial Proposal</a></li>
+        
+        </ul>
+      </section>
+      
+      <section class="meta">
+        <h2>Meta</h2>
+        <ul>
+        
+          <li><a href="/meta/motivations">Motivations</a></li>
+        
+        </ul>
+      </section>
+
+      <section class="diary">
+        <h2>Diary</h2>
+        <ul>
+        
+          <li><h3>12 May 2014</h3>
+            <ul>
+            
+              <li><a href="/2014/05/12/current-questions-for-the-team">Current questions for the team</a></li>
+            
+              <li><a href="/2014/05/12/team">Team</a></li>
+            
+              <li><a href="/2014/05/12/infrastructure-constraints">Infrastructure constraints</a></li>
+            
+              <li><a href="/2014/05/12/user-interface-initial-thoughts">User interface, initial thoughts</a></li>
+            
+            </ul>
+          </li>
+        
+        </ul>
+      </section>
+
+    </section>
+
+    <section class="body">
+
+      <h1>Summary</h1>
+      <h3 id="in-a-nutshell">In a nutshell</h3>
+<p>I work for a company that does diagnostic testing for pharmaceutical
+companies as part of their clinical trials: ECG and Holter (heart monitoring),
+respiratory, blood pressure, survey data, etc. One of their services is to
+provide data from this testing back to the trial sponsors in client-specific
+formats, on client- specified schedules. Essentially this part of the
+business is a data pipeline managed by a patchwork of systems and paper
+trails, and the two departments responsible for getting out the data are
+called &quot;Project Management&quot; (PM) and &quot;Programming&quot; or &quot;SAs&quot;. In addition,
+there is a group within Project Management called &quot;Data Managers&quot; (DM) who
+are particularly involved in this process. (Whereas the Project Managers
+have other responsibilities beyond the data).</p>
+<p>One key part of the process (but by no means the only part) is the <em>group
+calendar/task lists</em> that the PM/DMs maintain. In addition to reminding them
+and the SAs what is due on a particular day, and marking it complete when
+sent, the PM directors use data from these lists to determine a performance
+metric: <em># and % of data sends late per month</em>.</p>
+<p>For various reasons described below, the PM directors have decided they cannot
+live with their current tools, which are siloed between departments and
+company locations, and in some cases no longer supported by IT. There have
+even been problems with missing some data send deadlines. They approached
+me about developing a more centralized system to meet their needs better.</p>
+<h3 id="summary-of-current-process">Summary of current process</h3>
+<p>Project Managers and Data Managers (PMs and DMs) need to keep track of a
+schedule for <em>data sends</em> to clients. That is to say, they are responsible
+for data being sent by the SA team to a particular client on a particular
+date, and on recurring dates.</p>
+<p>PMs create the schedules initially when the final data format has been
+approved (see below), based on information the client supplies about how
+often the data is to be sent. The DMs look at the schedule every Friday
+and decide who is responsible for each data send for the following week,
+and assign themselves to them. <em>[This is the process in the Philadelphia
+office, need to find out how other offices do it.]</em></p>
+<p>PMs and DMs use this schedule as a <em>task list</em>, marking data sends as
+<em>complete</em> when they receive confirmation from the SAs (or when the SAs
+themselves mark it as complete).</p>
+<p>Each data send task has a number of additional fields they use for
+sorting/filtering/searching, such as account number, data type, etc. as well
+as a &#39;reason&#39; comments field for when a data send is late.</p>
+<p>For the most part, PMs and DMs look at only their own data sends, but
+occasionally need to see others as well if someone is out of the office,
+etc. SAs basically only need to see what is due for today, in particular
+what data is ready to send for today.</p>
+<p>From monthly data gathered across all offices, Project Manager directors
+can derive metrics for PM or DMs <em>[need to clarify]</em> from the number or
+percentage of <em>late</em> data sends.</p>
+<h3 id="a-larger-picture">A larger picture</h3>
+<p>The DMs (or in some cases the SAs) <em>extract</em> the data from production systems
+as CSV and then <em>run</em> the data through SAS programs. These programs have been
+previously tested on a subset of production data through the Programming
+SDLC process [yes they do actually call it that, waterfall is alive and
+bubbling], and approved by the client, via a formal contract called a Data
+Transfer Agreement (DTA). Once ready, the DMs <em>notify</em> the SA team through
+an email to a shared <em>Google Group</em>.</p>
+<p>The SA team assigns a rotating person per day <em>[in each office?]</em> to do &quot;data
+sends&quot;. This person checks what sends are <em>ready</em> (on the Google Group list),
+and sends the data via client-specified method (FTP, etc).  This process may
+change in the future so that DMs do the data sends for their own requests
+(rather than as SAs do, on a rotating basis).</p>
+<p>However, all we are concerned with here basically are the <em>deadline</em> and
+<em>status</em> of the data sends, none of the mechanics.</p>
+<h3 id="areas-of-inefficiency-in-the-current-process">Areas of inefficiency in the current process</h3>
+<h4 id="the-current-process-is-siloed-between-departments-and-ert-locations-">The current process is siloed between departments and ERT locations.</h4>
+<p>The PM/DMs themselves use at least three different systems for tracking the
+data send schedules:</p>
+<ol>
+<li><p>a shared &quot;Task Pad&quot; in Outlook (one in Philly, one in Peterborough);</p>
+</li>
+<li><p>a Google Calendar (Pittsburgh);</p>
+</li>
+<li><p>a calendar application of some sort designed as part of another
+system. (Germany)</p>
+</li>
+</ol>
+<p>The communication with the SA team is done outside of any of these, partially
+through a Google Group (DM informing SAs  data is ready) and partially via
+email (SAs informing DMs data has been sent).</p>
+<p>As a result, there are several points of communication between departments
+that are largely unnecessary except from the point of view of having a paper
+trail for a clumsy process.</p>
+<h4 id="outlook-is-not-going-to-be-supported-by-it-">Outlook is not going to be supported by IT.</h4>
+<p>Many people no longer have Outlook installed, in fact.</p>
+<h4 id="there-is-no-sync-between-personal-calendars-and-the-data-sends-">There is no sync between personal calendars and the data sends.</h4>
+<p>DMs are double-entering their data sends into their own personal calendars.</p>
+<h4 id="there-is-much-duplication-between-another-system-">There is much duplication between another system.</h4>
+<p>All of the identifying fields on a data send, with the possible exception
+of the Data Manager, are also present in the Programming Requests system
+[another system which manages an earlier stage in the data pipeline].</p>
+
+
+    </section>
+
+    <section class="footer">
+    </section>
+
+</div>
