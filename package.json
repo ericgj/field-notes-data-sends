@@ -1,0 +1,18 @@
+{
+  "name": "data-sends-notes",
+  "version": "0.0.0",
+  "description": "",
+  "main": "build.js",
+  "dependencies": {
+    "metalsmith": "^0.8.0",
+    "metalsmith-drafts": "*",
+    "metalsmith-permalinks": "^0.3.0",
+    "metalsmith-markdown": "^0.2.0",
+    "metalsmith-templates": "^0.4.0",
+    "metalsmith-branch": "*",
+    "swig": "^1.3.0"
+  },
+  "devDependencies": {},
+  "author": "Eric Gjertsen",
+  "license": "MIT"
+}
