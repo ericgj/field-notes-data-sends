@@ -5,7 +5,7 @@ deploy: gh_pages
 	@git checkout gh-pages && git push origin gh-pages
 
 gh_pages: build
-	@git branch -D gh-pages && git checkout -b gh-pages && mkdir -p ./.saved && mv build ./.saved/ && mv node_modules ./.saved/ && mv components ./.saved/ && rm -r ./* && mv ./.saved/build/* . && mv ./.saved/* . && echo "node_modules" > .gitignore && echo "components" >> .gitignore && git add -A && git commit
+	@git checkout gh-pages && mkdir -p ./.saved && mv build ./.saved/ && mv node_modules ./.saved/ && mv components ./.saved/ && rm -r ./* && mv ./.saved/build/* . && mv ./.saved/* . && echo "node_modules" > .gitignore && echo "components" >> .gitignore && echo ".saved" >> .gitignore && git add -A && git commit
 
 clean:
 	@rm -rf build node_modules components
