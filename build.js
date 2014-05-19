@@ -94,6 +94,7 @@ function rename(patt,repl){
 var m = Metalsmith(__dirname)
   
  m.source('content')
+  .clean(false)
   .use( index  )
   .use(
     branch('text/*.md')
@@ -133,6 +134,7 @@ m.build( function(err){
   if (err) throw(err); 
   c.build( function(err,res){
     if (err) throw(err);
+    mkdir('build');
     write('build/build.js', res.require + res.js);
     write('build/build.css', res.css);
   });
