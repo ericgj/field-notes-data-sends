@@ -11,6 +11,7 @@ var Metalsmith = require('metalsmith')
   , permalinks = require('metalsmith-permalinks')
   , templates  = require('metalsmith-templates')
 
+var moment = require('moment')
 var Component = require('component-builder')
 
 var mkdir = require('mkdirp');
@@ -38,6 +39,20 @@ function sortby(prop,dir){
   }
 }
 
+function groupby(list,fn){
+  var idx = {};
+  var ret = [];
+  list.forEach( function(item){
+    var key = fn(item);
+    if (!has.call(idx,key)) idx[key] = ret.length;
+    var grp = ret[idx[key]] = ret[idx[key]] || {};
+    grp.key = key;
+    grp.values = grp.values || [];
+    grp.values.push(item);
+  });
+  return ret;
+}
+
 function index(files,metalsmith,done){
   var idx = {}
   setImmediate(done);
@@ -52,6 +67,13 @@ function index(files,metalsmith,done){
   idx['meta'].sort(  sortby('filename',1) )
   idx['diary'].sort( sortby('date',-1) )
 
+  idx['diary'] = groupby( idx['diary'], 
+                          function(it){ 
+                            if (!has.call(it,'date')) return '(undated)';
+                            return moment(it.date).utc().format('D MMM YYYY');
+                          }
+                        )
+ 
   var m = metalsmith.metadata();
   m['index'] = idx;
 }

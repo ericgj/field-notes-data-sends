@@ -33,8 +33,14 @@
       <section class="diary">
         <h2>Diary</h2>
         <ul>
-        {% for f in index['diary'] %}
-          <li><a href="/{{ f.path }}">{{ f.title }}</a></li>
+        {% for grp in index['diary'] %}
+          <li><h3>{{ grp.key }}</h3>
+            <ul>
+            {% for f in grp.values %}
+              <li><a href="/{{ f.path }}">{{ f.title }}</a></li>
+            {% endfor %}
+            </ul>
+          </li>
         {% endfor %}
         </ul>
       </section>

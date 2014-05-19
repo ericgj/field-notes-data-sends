@@ -17,5 +17,5 @@ _12 May 2014_ Please note that these notes are quite rough, and will be for some
 4. This particular application seems appropriate ("not too big and not too small"), and I am able to do it without violating any nondisclosure clause;
 5. I would very much appreciate feedback, both on the code itself and on these notes.
 
-I am writing more about my [motivations](/meta/motivations), but it's really a lot of words to start there, so shall we just jump in?
+I am writing more about my [motivations](/meta/motivations), but it's really a lot of words to start there, so shall we just [jump in](/summary)?
 
