@@ -1,6 +1,12 @@
 
 default: build
 
+deploy: gh_pages
+	@git checkout gh-pages && git push origin gh-pages
+
+gh_pages: build
+	@git branch -D gh-pages && git checkout -b gh-pages && mkdir -p ./.saved && mv build ./.saved/ && mv node_modules ./.saved/ && mv components ./.saved/ && rm -r ./* && mv ./.saved/build/* . && mv ./.saved/* . && echo "node_modules" > .gitignore && echo "components" >> .gitignore && git add -A && git commit
+
 clean:
 	@rm -rf build node_modules components
 
@@ -17,4 +23,4 @@ node_modules: package.json
 components: component.json
 	@component install
 
-.PHONY: build clean clean_build
+.PHONY: deploy gh_pages build clean clean_build
