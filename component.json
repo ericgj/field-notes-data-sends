@@ -1,0 +1,9 @@
+{
+  "name": "data-sends-notes",
+  "description": "",
+  "dependencies": {},
+  "development": {},
+  "styles": [
+    "styles.css"
+  ]
+}

@@ -1,0 +1,27 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font: 14pt sans-serif;
+}
+
+section {
+  padding: 1%;
+}
+
+section.index {
+  width: 20%;
+  float: left;
+  background-color: rgb(240,240,240);
+}
+
+section.body {
+  width: 80%;
+  float: left;
+}
+
+section.footer {
+  clear: both;
+}

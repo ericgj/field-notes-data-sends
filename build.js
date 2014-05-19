@@ -1,7 +1,8 @@
 'use strict';
 
-var path = require('path')
-var has = hasOwnProperty
+var path = require('path');
+var has = hasOwnProperty;
+var write = require('fs').writeFileSync;
 
 var Metalsmith = require('metalsmith')
   , branch     = require('metalsmith-branch')
@@ -9,6 +10,10 @@ var Metalsmith = require('metalsmith')
   , drafts     = require('metalsmith-drafts')
   , permalinks = require('metalsmith-permalinks')
   , templates  = require('metalsmith-templates')
+
+var Component = require('component-builder')
+
+var mkdir = require('mkdirp');
 
 function filetype(name){
   return function(filename,props){
@@ -64,8 +69,9 @@ function rename(patt,repl){
 }
 
 
-Metalsmith(__dirname)
-  .source('content')
+var m = Metalsmith(__dirname)
+  
+ m.source('content')
   .use( index  )
   .use(
     branch('text/*.md')
@@ -95,11 +101,19 @@ Metalsmith(__dirname)
       .use( templates({ engine: 'swig', directory: 'templates', default: 'index.swig' })
       )
   )
-  .build( function(err){ if (err) throw(err); } );
 
-/*
-      .use( branch( hasFlag('templated') )
-              .use( templates({ engine: 'swig', inPlace: true }) )
-              .use( markdown() )
-          )
-*/
+
+var c = new Component(__dirname);
+c.copyAssetsTo('build');
+c.copyFiles();
+
+m.build( function(err){ 
+  if (err) throw(err); 
+  c.build( function(err,res){
+    if (err) throw(err);
+    write('build/build.js', res.require + res.js);
+    write('build/build.css', res.css);
+  });
+});
+
+

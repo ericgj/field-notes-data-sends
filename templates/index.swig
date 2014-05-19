@@ -1,8 +1,9 @@
 <!doctype html>
 <html>
   <head>
-    <title>Field notes for a web app project :: {{ title }}</title>
+    <title>{{ title }} :: Field notes for a web app project</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="/build.css">
   </head>
   <body>
     <header>
