@@ -1,6 +1,7 @@
 ---
 title: Introduction
 status: public
+templated: true
 ---
 
 These are some semi-public notes I'm taking as I develop a web app for
@@ -39,6 +40,6 @@ small"), and I am able to do it without violating any nondisclosure clause;
 5. I would very much appreciate feedback, both on the code itself and on
 these notes.
 
-I am writing more about my [motivations](/meta/motivations), but it's really
-a lot of words to start there, so shall we just [jump in](/summary)?
+I am writing more about my [motivations]({{ url("meta/motivations") }}), but it's really
+a lot of words to start there, so shall we just [jump in]( {{ url("summary") }})?
 

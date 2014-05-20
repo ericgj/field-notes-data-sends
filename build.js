@@ -10,9 +10,11 @@ var Metalsmith = require('metalsmith')
   , drafts     = require('metalsmith-drafts')
   , permalinks = require('metalsmith-permalinks')
   , templates  = require('metalsmith-templates')
+  , metadata   = require('metalsmith-metadata')
 
-var moment = require('moment')
-var Component = require('component-builder')
+var moment = require('moment');
+var slug   = require('slug-component');
+var Component = require('component-builder');
 
 var mkdir = require('mkdirp');
 
@@ -90,11 +92,27 @@ function rename(patt,repl){
   }
 }
 
+function methods(files,metalsmith,done){
+  setImmediate(done);
+  var m = metalsmith.metadata();
+  
+  // TODO escape
+  m.url = function(name){
+    return [m.site.script_name, name].join('/');
+  }
+}
+
 
 var m = Metalsmith(__dirname)
-  
+
  m.source('content')
-  .clean(false)
+ m.clean(false)
+ 
+ m.use( metadata({
+          site: "site.json"
+        })
+  )
+  .use( methods )
   .use( index  )
   .use(
     branch('text/*.md')

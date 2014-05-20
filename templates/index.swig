@@ -3,7 +3,7 @@
   <head>
     <title>{{ title }} :: Field notes for a web app project</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="/build.css">
+    <link rel="stylesheet" href="{{ url("build.css") }}">
   </head>
   <body>
     <header>
@@ -12,11 +12,11 @@
     <section class="index">
 
       <section class="intro">
-        <h2><a href="/">Home</a></h2>
+        <h2><a href="{{ url("") }}">Home</a></h2>
         <h2>The project</h2>
         <ul>
         {% for f in index['intro'] %}
-          <li><a href="/{{ f.path }}">{{ f.title }}</a></li>
+          <li><a href="{{ url(f.path) }}">{{ f.title }}</a></li>
         {% endfor %}
         </ul>
       </section>
@@ -25,7 +25,7 @@
         <h2>Meta</h2>
         <ul>
         {% for f in index['meta'] %}
-          <li><a href="/{{ f.path }}">{{ f.title }}</a></li>
+          <li><a href="{{ url(f.path) }}">{{ f.title }}</a></li>
         {% endfor %}
         </ul>
       </section>
@@ -37,7 +37,7 @@
           <li><h3>{{ grp.key }}</h3>
             <ul>
             {% for f in grp.values %}
-              <li><a href="/{{ f.path }}">{{ f.title }}</a></li>
+              <li><a href="{{ url(f.path) }}">{{ f.title }}</a></li>
             {% endfor %}
             </ul>
           </li>
