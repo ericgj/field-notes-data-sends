@@ -84,9 +84,10 @@ I will come to that later.
 
 -----
 
-<a name="note1"></a> 1. Another factor is license / nondisclosure agreement /
-competition issues. I am not dismissing these entirely, they definitely do take
-out a whole chunk of the world's codebase, particularly for _applications_
-vs _libraries_, and they leave a censoring wake behind them, on projects
-which are not or only partially closed.
+<a name="note1"></a> 
+[1] Another factor is license / nondisclosure agreement / competition issues. I
+am not dismissing these entirely, they definitely do take out a whole chunk
+of the world's codebase, particularly for _applications_ vs _libraries_.
+They also leave a censoring wake behind them, for projects which are not or
+are only partially closed.
 

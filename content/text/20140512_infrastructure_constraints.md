@@ -29,8 +29,11 @@ given our infrastructure.
 Google has a **CalDAV interface**, which would make it easier to swap out
 backends, theoretically, -- however:
 
-1. Google has threatened once to drop support for CalDAV (June 2013) 2. It is
-not clear whether Google's CalDAV stores non-standard properties in event data.
+1. Google has threatened once to drop support for CalDAV (June 2013) 
+
+2. It is not clear whether Google's CalDAV stores non-standard properties
+in event data.
+
 3. CalDAV is a bit more of a pain to use, because there is no CalDAV python
 client that deals with Google OAuth; you basically have to do the auth and
 the CalDAV requests using an httplib2 instance.

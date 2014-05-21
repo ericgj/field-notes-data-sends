@@ -25,3 +25,9 @@ The system could further integrated into existing tools/workflows by:
 where most of the data fields have already been entered;
 
 2. Auto-publishing events to PM/DM personal Google calendars.
+
+I see one of the primary aims of the system to be to _reduce the overall
+number of systems_ the PM/DMs have to access on a daily basis, rather than
+_adding yet another one to the pile_. Several years ago a PM enumerated to
+me 14 systems they have to access on a regular basis. I can't imagine it's
+less than that now.
