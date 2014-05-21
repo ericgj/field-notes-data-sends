@@ -41,7 +41,7 @@ PMs create the schedules initially when the final data format has been
 approved (see below), based on information the client supplies about how
 often the data is to be sent. The DMs look at the schedule every Friday
 and decide who is responsible for each data send for the following week,
-and assign themselves to them. [[1]](note1)
+and assign themselves to them. [[1]](#note1)
 
 PMs and DMs use this schedule as a _task list_, marking data sends as
 _complete_ when they receive confirmation from the SAs (or when the SAs
@@ -65,7 +65,7 @@ percentage of _late_ data sends.
 The DMs (or in some cases the SAs) _extract_ the data from production systems
 as CSV and then _run_ the data through SAS programs. These programs have
 been previously tested on a subset of production data through the Programming
-SDLC process [[2]](note2), and approved by the client, via a formal contract
+SDLC process [[2]](#note2), and approved by the client, via a formal contract
 called a Data Transfer Agreement (DTA). Once ready, the DMs _notify_ the SA
 team through an email to a shared _Google Group_.
 
