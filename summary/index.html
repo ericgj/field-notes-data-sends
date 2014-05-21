@@ -41,9 +41,9 @@
             
               <li><a href="/field-notes-data-sends/2014/05/12/team">Team</a></li>
             
-              <li><a href="/field-notes-data-sends/2014/05/12/current-questions-for-the-team">Current questions for the team</a></li>
-            
               <li><a href="/field-notes-data-sends/2014/05/12/infrastructure-constraints">Infrastructure constraints</a></li>
+            
+              <li><a href="/field-notes-data-sends/2014/05/12/current-questions-for-the-team">Current questions for the team</a></li>
             
               <li><a href="/field-notes-data-sends/2014/05/12/user-interface-initial-thoughts">User interface, initial thoughts</a></li>
             
@@ -58,23 +58,23 @@
     <section class="body">
 
       <h1>Summary</h1>
-      <h3 id="in-a-nutshell">In a nutshell</h3>
+      <h3 id="-data-sends-in-a-nutshell">&quot;Data Sends&quot;: in a nutshell</h3>
 <p>I work for a company that does diagnostic testing for pharmaceutical
 companies as part of their clinical trials: ECG and Holter (heart monitoring),
 respiratory, blood pressure, survey data, etc. One of their services is to
 provide data from this testing back to the trial sponsors in client-specific
-formats, on client- specified schedules. Essentially this part of the
-business is a data pipeline managed by a patchwork of systems and paper
-trails, and the two departments responsible for getting out the data are
-called &quot;Project Management&quot; (PM) and &quot;Programming&quot; or &quot;SAs&quot;. In addition,
-there is a group within Project Management called &quot;Data Managers&quot; (DM) who
-are particularly involved in this process. (Whereas the Project Managers
-have other responsibilities beyond the data).</p>
+formats, on client- specified schedules. This service is known as <em>data sends</em>,
+and essentially the process is a data pipeline currently managed by a patchwork
+of systems and paper trails. The two departments responsible for getting out
+the data are called <em>Project Managers (PMs)</em> and <em>Programming</em> or <em>SAs</em>. In
+addition, there is a group within Project Management called <em>Data Managers
+(DMs)</em> who are particularly involved in this process. (Whereas the Project
+Managers have other responsibilities beyond the data sends).</p>
 <p>One key part of the process (but by no means the only part) is the <em>group
-calendar/task lists</em> that the PM/DMs maintain. In addition to reminding them
-and the SAs what is due on a particular day, and marking it complete when
+calendar</em> and <em>task lists</em> that the PM/DMs maintain. In addition to reminding
+them and the SAs what is due on a particular day, and marking it complete when
 sent, the PM directors use data from these lists to determine a performance
-metric: <em># and % of data sends late per month</em>.</p>
+metric: <em>number and percent of data sends late per month</em>.</p>
 <p>For various reasons described below, the PM directors have decided they cannot
 live with their current tools, which are siloed between departments and
 company locations, and in some cases no longer supported by IT. There have
@@ -89,8 +89,7 @@ date, and on recurring dates.</p>
 approved (see below), based on information the client supplies about how
 often the data is to be sent. The DMs look at the schedule every Friday
 and decide who is responsible for each data send for the following week,
-and assign themselves to them. <em>[This is the process in the Philadelphia
-office, need to find out how other offices do it.]</em></p>
+and assign themselves to them. <a href="note1">[1]</a></p>
 <p>PMs and DMs use this schedule as a <em>task list</em>, marking data sends as
 <em>complete</em> when they receive confirmation from the SAs (or when the SAs
 themselves mark it as complete).</p>
@@ -104,14 +103,13 @@ what data is ready to send for today.</p>
 <p>From monthly data gathered across all offices, Project Manager directors
 can derive metrics for PM or DMs <em>[need to clarify]</em> from the number or
 percentage of <em>late</em> data sends.</p>
-<h3 id="a-larger-picture">A larger picture</h3>
+<h3 id="what-actually-is-involved-in-a-data-send-">What actually is involved in a &quot;data send&quot;?</h3>
 <p>The DMs (or in some cases the SAs) <em>extract</em> the data from production systems
-as CSV and then <em>run</em> the data through SAS programs. These programs have been
-previously tested on a subset of production data through the Programming
-SDLC process [yes they do actually call it that, waterfall is alive and
-bubbling], and approved by the client, via a formal contract called a Data
-Transfer Agreement (DTA). Once ready, the DMs <em>notify</em> the SA team through
-an email to a shared <em>Google Group</em>.</p>
+as CSV and then <em>run</em> the data through SAS programs. These programs have
+been previously tested on a subset of production data through the Programming
+SDLC process <a href="note2">[2]</a>, and approved by the client, via a formal contract
+called a Data Transfer Agreement (DTA). Once ready, the DMs <em>notify</em> the SA
+team through an email to a shared <em>Google Group</em>.</p>
 <p>The SA team assigns a rotating person per day <em>[in each office?]</em> to do &quot;data
 sends&quot;. This person checks what sends are <em>ready</em> (on the Google Group list),
 and sends the data via client-specified method (FTP, etc).  This process may
@@ -120,7 +118,7 @@ change in the future so that DMs do the data sends for their own requests
 <p>However, all we are concerned with here basically are the <em>deadline</em> and
 <em>status</em> of the data sends, none of the mechanics.</p>
 <h3 id="areas-of-inefficiency-in-the-current-process">Areas of inefficiency in the current process</h3>
-<h4 id="the-current-process-is-siloed-between-departments-and-ert-locations-">The current process is siloed between departments and ERT locations.</h4>
+<h4 id="the-current-process-is-siloed-between-departments-and-office-locations-">The current process is siloed between departments and office locations.</h4>
 <p>The PM/DMs themselves use at least three different systems for tracking the
 data send schedules:</p>
 <ol>
@@ -145,7 +143,14 @@ trail for a clumsy process.</p>
 <h4 id="there-is-much-duplication-between-another-system-">There is much duplication between another system.</h4>
 <p>All of the identifying fields on a data send, with the possible exception
 of the Data Manager, are also present in the Programming Requests system
-[another system which manages an earlier stage in the data pipeline].</p>
+(another system which manages an earlier stage in the data pipeline).</p>
+<hr>
+<p><a name="note1"></a>
+[1] This is the process in the Philadelphia office, need to find out how other 
+offices do it.</p>
+<p><a name="note2"></a>
+[2] Yes they do actually call it that, waterfall is alive and bubbling along
+in the pharma industry.</p>
 
 
     </section>

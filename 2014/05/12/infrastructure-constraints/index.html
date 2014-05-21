@@ -41,9 +41,9 @@
             
               <li><a href="/field-notes-data-sends/2014/05/12/team">Team</a></li>
             
-              <li><a href="/field-notes-data-sends/2014/05/12/current-questions-for-the-team">Current questions for the team</a></li>
-            
               <li><a href="/field-notes-data-sends/2014/05/12/infrastructure-constraints">Infrastructure constraints</a></li>
+            
+              <li><a href="/field-notes-data-sends/2014/05/12/current-questions-for-the-team">Current questions for the team</a></li>
             
               <li><a href="/field-notes-data-sends/2014/05/12/user-interface-initial-thoughts">User interface, initial thoughts</a></li>
             
@@ -78,11 +78,15 @@ given our infrastructure.</p>
 <p>Google has a <strong>CalDAV interface</strong>, which would make it easier to swap out
 backends, theoretically, -- however:</p>
 <ol>
-<li>Google has threatened once to drop support for CalDAV (June 2013) 2. It is
-not clear whether Google&#39;s CalDAV stores non-standard properties in event data.</li>
-<li>CalDAV is a bit more of a pain to use, because there is no CalDAV python
+<li><p>Google has threatened once to drop support for CalDAV (June 2013) </p>
+</li>
+<li><p>It is not clear whether Google&#39;s CalDAV stores non-standard properties
+in event data.</p>
+</li>
+<li><p>CalDAV is a bit more of a pain to use, because there is no CalDAV python
 client that deals with Google OAuth; you basically have to do the auth and
-the CalDAV requests using an httplib2 instance.</li>
+the CalDAV requests using an httplib2 instance.</p>
+</li>
 </ol>
 <p>For these reasons, the Google <strong>Calendar API</strong> client seems like a better
 choice, most likely wrapped in an application adapter layer since we don&#39;t
